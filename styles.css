@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokedex {
+  background-color: white;
+  width: 700px;
+  height: 500px;
+  display: flex;
+
+}
+
+.pokemon {
+  border: 2px solid red;
+  width: 65%;
+  padding: 10px;
+}
+
+.pokemons-list {
+  border: 2px solid red;
+  width: 35%;
+}
+
+.pokemons-list>div {
+  margin: 5px 0 5px 0;
+  width: 100%;
+  text-align: center;
+  background-color: darkgray;
+  cursor: pointer;
+}
