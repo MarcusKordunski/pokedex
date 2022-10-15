@@ -1,11 +1,10 @@
-import renderTags from "./utilities.js"
+import { renderTags, randomColor, percentOfStatbar } from "./utilities.js"
 
 
-let baseUrl = `https://pokeapi.co/api/v2/`
-let pokemonsUrl = `${baseUrl}pokemon?limit=20&offset=0`
-let pokemonSpeciesUrl = `${baseUrl}pokemon-species/`
-let pokemonUrl = `${baseUrl}pokemon/`
-
+const baseUrl = `https://pokeapi.co/api/v2/`
+const pokemonsUrl = `${baseUrl}pokemon?limit=900&offset=0`
+const pokemonSpeciesUrl = `${baseUrl}pokemon-species/`
+const pokemonUrl = `${baseUrl}pokemon/`
 
 async function getAllPokemons() {
   const response = await fetch(`${pokemonsUrl}`, {
@@ -43,16 +42,40 @@ async function renderPokemonInfo(id) {
       ${renderTags(data.types)}
     </div>
     <div class="about-img">
-      <img class="pokemon-img" src='${data.sprites.front_default}' alt=''>
+      <img class="pokemon-img" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt=''>
       <p class="about">${aboutArr[0].flavor_text}</p>
     </div>
-    <div class="hexagon">
-      <div class="hp"></div>
-      <div class="attack"></div>
-      <div class="defense"></div>
-      <div class="special-attack"></div>
-      <div class="special-defense"></div>
-      <div class="speed"></div> 
+    <div class="stats">
+    <h2>Base Stats</h2>
+    <p>HP</p>
+    <div class="stat-bar">
+      <div class="stat hp" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[0].base_stat)}%;">${data.stats[0].base_stat}</div>
+    </div>
+    
+    <p>Attack</p>
+    <div class="stat-bar">
+      <div class="stat atk" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[1].base_stat)}%;">${data.stats[1].base_stat}</div>
+    </div>
+    
+    <p>Defense</p>
+    <div class="stat-bar">
+      <div class="stat def" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[2].base_stat)}%;">${data.stats[2].base_stat}</div>
+    </div>
+    
+    <p>Special Attack</p>
+    <div class="stat-bar">
+      <div class="stat sa" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[3].base_stat)}%;">${data.stats[3].base_stat}</div>
+    </div>
+
+    <p>Special Defense</p>
+    <div class="stat-bar">
+      <div class="stat sd" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[4].base_stat)}%;">${data.stats[4].base_stat}</div>
+    </div>
+
+    <p>Speed</p>
+    <div class="stat-bar">
+      <div class="stat speed" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[5].base_stat)}%;">${data.stats[5].base_stat}</div>
+    </div>
     </div>
   </div>
   `
@@ -65,14 +88,11 @@ async function renderPokemonsList() {
   for (let i = 0; i < pokemonsList.length; i++) {
     let pokemon = document.createElement('div')
     pokemon.classList.add('.pokemons-list__item')
-    pokemon.innerHTML = `${pokemonsList[i].name}`
+    pokemon.innerHTML = `<div>${pokemonsList[i].name}</div><img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i + 1}.png' alt ='' width='60'>`
     let splitId = pokemonsList[i].url.split('/')
     let id = splitId[splitId.length - 2]
     document.querySelector('.pokemons-list').appendChild(pokemon)
     pokemon.addEventListener('click', () => { renderPokemonInfo(id) })
   }
 }
-
 renderPokemonsList()
-
-
