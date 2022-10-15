@@ -7,6 +7,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Silkscreen', cursive;
 }
 
 .pokedex {
@@ -14,18 +15,19 @@ body {
   width: 700px;
   height: 500px;
   display: flex;
-
+  border-radius: 3%;
 }
 
 .pokemon {
-  border: 2px solid red;
   width: 65%;
   padding: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .pokemons-list {
-  border: 2px solid red;
   width: 35%;
+  overflow-y: scroll;
 }
 
 .pokemons-list>div {
@@ -34,4 +36,46 @@ body {
   text-align: center;
   background-color: darkgray;
   cursor: pointer;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.name {
+  font-size: 2em;
+  margin: 12px 0;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+
+.tag {
+  border: 1px solid black;
+  padding: 0px 10px;
+  border-radius: 7%;
+  position: relative;
+}
+
+.pokemon-img {
+  width: 150px;
+}
+
+.about-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about {
+  width: 60%;
 }
