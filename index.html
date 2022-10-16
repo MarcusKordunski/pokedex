@@ -13,8 +13,15 @@
 
 <body>
   <div class="pokedex">
-    <div class="pokemon"></div>
-    <div class="pokemons-list"></div>
+    <div class="pokemon">
+      <div class="pokemon-page"></div>
+      <div class="loader-pokemon">loading...</div>
+    </div>
+    <div class="pokemons-list">
+      <input type="search" placeholder="Search for Pokémon" class="search"></input>
+      <div class="loader">loading...</div>
+      <div class="pokemons-list__list active"></div>
+    </div>
   </div>
   <script src="script.js" type="module"></script>
 </body>

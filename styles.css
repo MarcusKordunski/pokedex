@@ -11,16 +11,21 @@ body {
 }
 
 .pokedex {
-  background-color: #eee;
+  background-color: #FFFDFA;
   width: 750px;
   height: 500px;
   display: flex;
-  border-radius: 3%;
+  border-radius: 16px;
+  box-shadow:
+    inset 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    inset 0 2px 2px hsl(0deg 0% 0% / 0.075),
+    inset 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    inset 0 8px 8px hsl(0deg 0% 0% / 0.075),
+    inset 0 16px 16px hsl(0deg 0% 0% / 0.075);
 }
 
 .pokemon {
   width: 65%;
-  padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -28,9 +33,17 @@ body {
 .pokemons-list {
   width: 35%;
   overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 30px;
+  position: relative;
 }
 
-.pokemons-list>div {
+.pokemon__info {
+  padding: 0 10px 10px 10px;
+}
+
+.pokemons-list__list>div {
   height: 40px;
   width: 100%;
   display: flex;
@@ -40,8 +53,18 @@ body {
   font-size: 1.2em;
 }
 
-.pokemons-list>div:hover {
+.pokemons-list__list>div:hover {
   background-color: #ddd;
+}
+
+
+.pokemons-list__list {
+  display: none
+}
+
+
+.pokemons-list__list.active {
+  display: block
 }
 
 .header {
@@ -103,4 +126,96 @@ body {
 
 .stats>h2 {
   margin: 15px 0;
+}
+
+.search {
+  width: 100%;
+  height: 40px;
+  top: 0px;
+  border: 0.2em solid #ddd;
+  border-radius: 8px;
+  background-color: #FFFDFA;
+  position: sticky;
+  font-family: 'Silkscreen', cursive;
+  font-size: 0.9em;
+  box-shadow:
+    inset 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    inset 0 2px 2px hsl(0deg 0% 0% / 0.075),
+    inset 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    inset 0 8px 8px hsl(0deg 0% 0% / 0.075),
+    inset 0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
+
+.additional-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loader {
+  display: none;
+}
+
+.loader.active {
+  display: block;
+  position: absolute;
+  left: 30%;
+  top: 45%;
+}
+
+.loader-pokemon {
+  display: none;
+}
+
+.loader-pokemon.active {
+  display: block;
+  position: absolute;
+  left: 37%;
+  top: 35%;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.menu-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  width: 8em;
+  text-align: center;
+  height: 3em;
+  width: 60%;
+  transition: 0.4s;
+}
+
+.menu-btn:hover {
+  color: #FFFDFA;
+  background-color: #c53854;
+}
+
+.menu-btn-1.active {
+  color: #FFFDFA;
+  background-color: #a00020;
+  border-radius: 16px 0 0;
+}
+
+.menu-btn-2.active {
+  color: #FFFDFA;
+  background-color: #a00020;
+}
+
+.menu-btn-3.active {
+  color: #FFFDFA;
+  background-color: #a00020;
+}
+
+.menu-btn>p {
+  margin: 0;
 }
