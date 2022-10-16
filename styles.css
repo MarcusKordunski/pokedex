@@ -3,7 +3,9 @@
 }
 
 body {
-  background-color: crimson;
+  width: 95vw;
+  height: 90vh;
+  background-color: #5E091A;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,9 +14,9 @@ body {
 }
 
 .pokedex {
-  background-color: #FFFDFA;
-  width: 50em;
-  height: 30em;
+  background-color: #F1E7D2;
+  width: 55em;
+  height: 38em;
   display: flex;
   border-radius: 16px;
   box-shadow:
@@ -48,7 +50,8 @@ body {
   padding: 0 1em 1em 1em;
 }
 
-.pokemons-list__list>div {
+.pokemons-list__list>div,
+.fav-list-item {
   height: 40px;
   width: 100%;
   display: flex;
@@ -58,10 +61,25 @@ body {
   font-size: 1.2em;
 }
 
-.pokemons-list__list>div:hover {
+.fav-list-item {
+  justify-content: space-between;
+  padding-right: 0.5em;
+}
+
+.fav-title {
+  font-size: 1.2em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.pokemons-list__list>div:hover,
+.fav-list-item:hover {
   background-color: #ddd;
 }
 
+.favorites-list {
+  border-bottom: 4px #cdd2d2 dashed;
+}
 
 .pokemons-list__list {
   display: none
@@ -206,6 +224,12 @@ body {
   transition: 0.4s;
   background-color: #a00020;
   color: #FFFDFA;
+  box-shadow:
+    inset 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    inset 0 2px 2px hsl(0deg 0% 0% / 0.075),
+    inset 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    inset 0 8px 8px hsl(0deg 0% 0% / 0.075),
+    inset 0 16px 16px hsl(0deg 0% 0% / 0.075);
 }
 
 .menu-btn:hover {
@@ -218,18 +242,18 @@ body {
 
 .menu-btn-1.active {
   color: #0e1111;
-  background-color: #FFFDFA;
+  background-color: #F1E7D2;
   border-radius: 16px 0 0;
 }
 
 .menu-btn-2.active {
   color: #0e1111;
-  background-color: #FFFDFA;
+  background-color: #F1E7D2;
 }
 
 .menu-btn-3.active {
   color: #0e1111;
-  background-color: #FFFDFA;
+  background-color: #F1E7D2;
 }
 
 .menu-btn>p {
@@ -238,6 +262,8 @@ body {
 
 .pokemon__evol {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   padding: 0.5em 2em;
   margin: 0 auto;
@@ -254,7 +280,7 @@ body {
 .ability-table,
 th,
 td {
-  border: 2px solid white;
+  border: 2px solid #F1E7D2;
   border-collapse: collapse;
   font-weight: normal;
   box-shadow:
@@ -268,4 +294,27 @@ td {
 th,
 td {
   background-color: #96D4D4;
+}
+
+.favorite {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.fav-btn {
+  cursor: pointer;
+  filter: contrast(1%);
+  transition: 0.3s;
+}
+
+.fav-btn.active {
+  filter: none;
+}
+
+.favorite>p {
+  font-size: 12px;
+  margin: 0;
 }

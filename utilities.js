@@ -1,4 +1,5 @@
 import { getPokemon } from "./api.js";
+import { renderPokemonsList } from "./script.js";
 
 const tagColor = {
   normal: '#edf5f4',
@@ -60,6 +61,7 @@ export async function renderChain(chain) {
   }
   for (let i = 0; i < arrInfo.length; i++) {
     html += `
+    ${i > 0 ? '<div><img src="./arrow-down.png" alt="" width=70></div>' : ''}
     <div class="chain-item chain-item-${i + 1}">
       <div><img class="chain-item-img" src='${arrInfo[i].sprites.front_default}' alt='${arrInfo[i].name}'></div>
       <p class="chain-item-name">${arrInfo[i].name}</p>
@@ -68,25 +70,14 @@ export async function renderChain(chain) {
   return html
 }
 
-export function animateStatBars() {
-  function animation() {
-    bars[i].style.width = `${bars[i].offsetWidth += 1}`
-    if (bars[i].offsetWidth >= initWidths[i]) {
-      cancelAnimationFrame(id)
-    }
-    requestAnimationFrame(animation)
+export async function setFavorite(id) {
+  let favBtn = document.querySelector('.fav-btn')
+  if (localStorage.getItem(`${id}`) === null) {
+    favBtn.classList.add('active')
+    localStorage.setItem(`${id}`, `${id}`)
+  } else {
+    favBtn.classList.remove('active')
+    localStorage.removeItem(`${id}`)
   }
-
-  let bars = document.querySelectorAll('.stat')
-  for (let i = 0; i < bars.length; i++) {
-    bars[i].style.width = "0"
-  }
-  console.log(bars)
-  let initWidths = []
-  for (let i = 0; i < bars.length; i++) {
-    initWidths.push(bars[i].offsetWidth)
-  }
-  for (let i = 0; i < bars.length; i++) {
-    let id = requestAnimationFrame(animation)
-  }
+  await renderPokemonsList()
 }
