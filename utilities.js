@@ -1,3 +1,5 @@
+import { getPokemon } from "./api.js";
+
 const tagColor = {
   normal: '#edf5f4',
   fighting: '#fc0032',
@@ -38,4 +40,53 @@ export function randomColor() {
 export function percentOfStatbar(number) {
   let max = 255
   return number / (max / 100);
+}
+
+export async function renderChain(chain) {
+  let chainObj = {}
+  let html = ''
+  if (chain.species !== undefined) {
+    chainObj[chain.species.name] = chain.species.url
+  }
+  if (chain.evolves_to[0]?.species !== undefined) {
+    chainObj[chain.evolves_to[0].species.name] = chain.evolves_to[0].species.url
+  }
+  if (chain.evolves_to[0]?.evolves_to[0]?.species !== undefined) {
+    chainObj[chain.evolves_to[0].evolves_to[0].species.name] = chain.evolves_to[0].evolves_to[0].species.url
+  }
+  let arrInfo = []
+  for (let key in chainObj) {
+    arrInfo.push(await getPokemon(chainObj[key].split('/')[chainObj[key].split('/').length - 2]))
+  }
+  for (let i = 0; i < arrInfo.length; i++) {
+    html += `
+    <div class="chain-item chain-item-${i + 1}">
+      <div><img class="chain-item-img" src='${arrInfo[i].sprites.front_default}' alt='${arrInfo[i].name}'></div>
+      <p class="chain-item-name">${arrInfo[i].name}</p>
+    </div>`
+  }
+  return html
+}
+
+export function animateStatBars() {
+  function animation() {
+    bars[i].style.width = `${bars[i].offsetWidth += 1}`
+    if (bars[i].offsetWidth >= initWidths[i]) {
+      cancelAnimationFrame(id)
+    }
+    requestAnimationFrame(animation)
+  }
+
+  let bars = document.querySelectorAll('.stat')
+  for (let i = 0; i < bars.length; i++) {
+    bars[i].style.width = "0"
+  }
+  console.log(bars)
+  let initWidths = []
+  for (let i = 0; i < bars.length; i++) {
+    initWidths.push(bars[i].offsetWidth)
+  }
+  for (let i = 0; i < bars.length; i++) {
+    let id = requestAnimationFrame(animation)
+  }
 }

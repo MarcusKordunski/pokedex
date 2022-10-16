@@ -1,5 +1,5 @@
-import { renderTags, randomColor, percentOfStatbar } from "./utilities.js"
-import { getAllPokemons, getPokemon, getPokemonEvolChain, getPokemonSpecies } from "./api.js"
+import { renderTags, randomColor, percentOfStatbar, renderChain, animateStatBars } from "./utilities.js"
+import { getAllPokemons, getPokemon, getPokemonAbility, getPokemonEvolChain, getPokemonSpecies } from "./api.js"
 
 async function renderPokemonInfo(id) {
   let pokedex = document.querySelector('.pokemon-page')
@@ -23,7 +23,7 @@ async function renderPokemonInfo(id) {
       ${renderTags(data.types)}
     </div>
     <div class="about-img">
-      <img class="pokemon-img" src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt=''>
+      <img class="pokemon-img" src='${data.sprites.front_default}' alt=''>
       <p class="about">${aboutArr[0].flavor_text}</p>
     </div>
     <div class="stats">
@@ -64,7 +64,7 @@ async function renderPokemonInfo(id) {
   pokedex.innerHTML = pokemonInfo
   document.querySelector('.menu-btn-1').addEventListener('click', () => { renderPokemonInfo(id) })
   document.querySelector('.menu-btn-2').addEventListener('click', () => { renderPokemonEvolution(id) })
-  document.querySelector('.menu-btn-3').addEventListener('click', () => { })
+  document.querySelector('.menu-btn-3').addEventListener('click', () => { renderPokemonAbilities(id) })
 }
 
 async function renderPokemonsList(search) {
@@ -93,26 +93,69 @@ async function renderPokemonsList(search) {
   loader.classList.toggle('active')
 }
 
-function async renderPokemonEvolution(id) {
+async function renderPokemonEvolution(id) {
   let pokedex = document.querySelector('.pokemon__info')
   pokedex.innerHTML = ''
   const loader = document.querySelector('.loader-pokemon')
   loader.classList.toggle('active')
   let species = await getPokemonSpecies(id)
   let data = await getPokemonEvolChain(species.evolution_chain.url)
-  let evolData = data.chain
+  let chain = data.chain
   let pokemonEvol = `
   <div class='pokemon__evol'>
-  Hi there!
+    ${await renderChain(chain)}
   </div>
   `
   loader.classList.toggle('active')
   pokedex.innerHTML = pokemonEvol
+  let chainItems = document.querySelectorAll('.chain-item')
+  chainItems.forEach(item => {
+    item.addEventListener('click', (event) => { renderPokemonInfo(event.target.alt) })
+  })
+
   document.querySelector('.menu-btn-1').classList.remove('active')
   document.querySelector('.menu-btn-2').classList.add('active')
   document.querySelector('.menu-btn-3').classList.remove('active')
 }
 
+async function renderPokemonAbilities(id) {
+  let pokedex = document.querySelector('.pokemon__info')
+  pokedex.innerHTML = ''
+  const loader = document.querySelector('.loader-pokemon')
+  loader.classList.toggle('active')
+  let data = await getPokemon(id)
+  let abilsArr = []
+  for (let i = 0; i < data.abilities.length; i++) {
+    abilsArr.push(await getPokemonAbility(data.abilities[i].ability.url))
+  }
+  let html = ''
+  for (let i = 0; i < abilsArr.length; i++) {
+    let effectInfo = abilsArr[i].effect_entries.filter(item => item.language.name === 'en')
+    html += `
+    <tr>
+      <th>${abilsArr[i].name}</th>
+      <th>${effectInfo[0].effect}</th>
+    </tr>`
+  }
+  let table = `
+  <div class="abilities">
+  <table class="ability-table">
+    <tr>
+      <th>Ability</th>
+      <th>Description</th>
+    </tr>
+    ${html}
+  </table>
+  </div>
+  `
+  loader.classList.toggle('active')
+  pokedex.innerHTML = table
+
+  document.querySelector('.menu-btn-1').classList.remove('active')
+  document.querySelector('.menu-btn-2').classList.remove('active')
+  document.querySelector('.menu-btn-3').classList.add('active')
+}
+
+renderPokemonsList()
 const search = document.querySelector('.search')
 search.addEventListener('input', () => { renderPokemonsList(search.value) })
-renderPokemonsList()

@@ -31,3 +31,10 @@ export async function getPokemonEvolChain(url) {
   })
   return response.json()
 }
+
+export async function getPokemonAbility(url) {
+  const response = await fetch(`${url}`, {
+    method: 'GET',
+  })
+  return response.json()
+}

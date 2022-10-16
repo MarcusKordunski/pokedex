@@ -8,12 +8,13 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Silkscreen', cursive;
+  color: #0e1111;
 }
 
 .pokedex {
   background-color: #FFFDFA;
-  width: 750px;
-  height: 500px;
+  width: 50em;
+  height: 30em;
   display: flex;
   border-radius: 16px;
   box-shadow:
@@ -39,8 +40,12 @@ body {
   position: relative;
 }
 
+.pokemons-list::-webkit-scrollbar {
+  display: none;
+}
+
 .pokemon__info {
-  padding: 0 10px 10px 10px;
+  padding: 0 1em 1em 1em;
 }
 
 .pokemons-list__list>div {
@@ -118,6 +123,12 @@ body {
   text-align: right;
   color: white;
   border-radius: 3em;
+  box-shadow:
+    inset 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    inset 0 2px 2px hsl(0deg 0% 0% / 0.075),
+    inset 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    inset 0 8px 8px hsl(0deg 0% 0% / 0.075),
+    inset 0 16px 16px hsl(0deg 0% 0% / 0.075);
 }
 
 .stats>p {
@@ -193,29 +204,68 @@ body {
   height: 3em;
   width: 60%;
   transition: 0.4s;
+  background-color: #a00020;
+  color: #FFFDFA;
 }
 
 .menu-btn:hover {
-  color: #FFFDFA;
-  background-color: #c53854;
+  background-color: #e40a35;
+}
+
+.menu-btn-1 {
+  border-radius: 16px 0 0;
 }
 
 .menu-btn-1.active {
-  color: #FFFDFA;
-  background-color: #a00020;
+  color: #0e1111;
+  background-color: #FFFDFA;
   border-radius: 16px 0 0;
 }
 
 .menu-btn-2.active {
-  color: #FFFDFA;
-  background-color: #a00020;
+  color: #0e1111;
+  background-color: #FFFDFA;
 }
 
 .menu-btn-3.active {
-  color: #FFFDFA;
-  background-color: #a00020;
+  color: #0e1111;
+  background-color: #FFFDFA;
 }
 
 .menu-btn>p {
   margin: 0;
+}
+
+.pokemon__evol {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5em 2em;
+  margin: 0 auto;
+}
+
+.chain-item-img {
+  cursor: pointer;
+}
+
+.abilities {
+  padding: 1em;
+}
+
+.ability-table,
+th,
+td {
+  border: 2px solid white;
+  border-collapse: collapse;
+  font-weight: normal;
+  box-shadow:
+    inset 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    inset 0 2px 2px hsl(0deg 0% 0% / 0.075),
+    inset 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    inset 0 8px 8px hsl(0deg 0% 0% / 0.075),
+    inset 0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
+
+th,
+td {
+  background-color: #96D4D4;
 }
