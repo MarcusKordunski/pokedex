@@ -26,7 +26,7 @@ async function renderPokemonInfo(id) {
       <p class="about">${aboutArr[0].flavor_text}</p>
     </div>
     <div class="stats">
-    <div class="additional-info"><h2>Base Stats</h2> <div class="favorite"><img class="fav-btn" src="./pixel-star.jpg" alt="" width=30><p>Set as favorite</p></div> <div><p>Height: ${data.height}</p><p>Weight: ${data.weight}</p></div></div>
+    <div class="additional-info"><h2>Base Stats</h2> <div class="favorite"><img class="fav-btn" src="./images/pixel-star.jpg" alt="" width=30><p>Set as favorite</p></div> <div><p>Height: ${data.height}</p><p>Weight: ${data.weight}</p></div></div>
     <p>HP</p>
     <div class="stat-bar">
       <div class="stat hp" style="background-color:${randomColor()};width:${percentOfStatbar(data.stats[0].base_stat)}%;">${data.stats[0].base_stat}</div>
@@ -95,7 +95,7 @@ export async function renderPokemonsList(search) {
     let pokemon = document.createElement('div')
     pokemon.classList.add('pokemons-list__item')
     pokemon.classList.add('fav-list-item')
-    pokemon.innerHTML = `<div>${pokemonsList[id - 1].name}</div> <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'> <div><img src='./pixel-star.jpg' alt ='' width='20'>`
+    pokemon.innerHTML = `<div>${pokemonsList[id - 1].name}</div> <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'> <div><img src='./images/pixel-star.jpg' alt ='' width='20'>`
     favList.appendChild(pokemon)
     pokemon.addEventListener('click', () => { renderPokemonInfo(id) })
   }

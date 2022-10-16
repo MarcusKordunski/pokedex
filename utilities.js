@@ -61,7 +61,7 @@ export async function renderChain(chain) {
   }
   for (let i = 0; i < arrInfo.length; i++) {
     html += `
-    ${i > 0 ? '<div><img src="./arrow-down.png" alt="" width=70></div>' : ''}
+    ${i > 0 ? '<div><img src="./images/arrow-down.png" alt="" width=70></div>' : ''}
     <div class="chain-item chain-item-${i + 1}">
       <div><img class="chain-item-img" src='${arrInfo[i].sprites.front_default}' alt='${arrInfo[i].name}'></div>
       <p class="chain-item-name">${arrInfo[i].name}</p>
