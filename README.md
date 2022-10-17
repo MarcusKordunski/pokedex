@@ -14,7 +14,7 @@ https://courageous-flan-2dd18e.netlify.app/
 #### Pokédex app, pokemon-themed encyclopedia with data from [The RESTful Pokémon API](https://pokeapi.co/)
 * Information about ~1000 pokemon.
 * Full evolution chains, pokemon are clickable to get to needed chain part
-* You can add pokemon to "favorite" in localStorage or just search them, so you will always have fast access to them
+* You can add pokemon to "favorite" in localStorage or just search them, so you will always have fast access to your pokemon!
 ## Images
 ![image](https://user-images.githubusercontent.com/95471509/196158990-76f70aad-e868-448c-bbb2-84cf4bf3a0f7.png)
 ![image](https://user-images.githubusercontent.com/95471509/196158826-2ac2317d-5824-4051-b7f4-61f77654db63.png)
