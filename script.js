@@ -1,5 +1,6 @@
 import { renderTags, randomColor, percentOfStatbar, renderChain, setFavorite } from "./utilities.js"
 import { getAllPokemons, getPokemon, getPokemonAbility, getPokemonEvolChain, getPokemonSpecies } from "./api.js"
+
 async function renderPokemonInfo(id) {
   let pokedex = document.querySelector('.pokemon-page')
   pokedex.innerHTML = ''
@@ -62,7 +63,7 @@ async function renderPokemonInfo(id) {
   loader.classList.toggle('active')
   pokedex.innerHTML = pokemonInfo
   let favBtn = document.querySelector('.fav-btn')
-  if (localStorage.getItem(`${data.id}`) !== null) {
+  if (localStorage.getItem(`pokemon${data.id}`) !== null) {
     favBtn.classList.add('active')
   }
 
@@ -90,15 +91,19 @@ export async function renderPokemonsList(search) {
   }
 
   for (let i = 0; i < localStorage.length; i++) {
+    let counter = 0
     let key = localStorage.key(i)
     let id = Number(localStorage.getItem(key))
-    if (id !== null) {
+    if (id !== null && key.includes('pokemon')) {
+      counter += 1
       let pokemon = document.createElement('div')
       pokemon.classList.add('pokemons-list__item')
       pokemon.classList.add('fav-list-item')
       pokemon.innerHTML = `<div>${pokemonsList[id - 1].name}</div> <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'> <div><img src='./images/pixel-star.jpg' alt ='' width='20'>`
       favList.appendChild(pokemon)
       pokemon.addEventListener('click', () => { renderPokemonInfo(id) })
+    } else if (i = localStorage.length - 1 && counter === 0) {
+      favList.innerHTML = '<p>No favorite pokémon</p>'
     }
   }
 
