@@ -9,7 +9,7 @@ To download the project:
 git clone https://github.com/MarcusKordunski/pokedex.git
 ```
 ### Deploy
--
+https://marcuskordunski.github.io/pokedex/
 ## About app
 #### Pokédex app, pokemon-themed encyclopedia with data from [The RESTful Pokémon API](https://pokeapi.co/)
 * Information about ~1000 pokemon.
