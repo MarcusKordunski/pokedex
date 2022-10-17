@@ -92,12 +92,14 @@ export async function renderPokemonsList(search) {
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i)
     let id = Number(localStorage.getItem(key))
-    let pokemon = document.createElement('div')
-    pokemon.classList.add('pokemons-list__item')
-    pokemon.classList.add('fav-list-item')
-    pokemon.innerHTML = `<div>${pokemonsList[id - 1].name}</div> <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'> <div><img src='./images/pixel-star.jpg' alt ='' width='20'>`
-    favList.appendChild(pokemon)
-    pokemon.addEventListener('click', () => { renderPokemonInfo(id) })
+    if (id !== null) {
+      let pokemon = document.createElement('div')
+      pokemon.classList.add('pokemons-list__item')
+      pokemon.classList.add('fav-list-item')
+      pokemon.innerHTML = `<div>${pokemonsList[id - 1].name}</div> <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'> <div><img src='./images/pixel-star.jpg' alt ='' width='20'>`
+      favList.appendChild(pokemon)
+      pokemon.addEventListener('click', () => { renderPokemonInfo(id) })
+    }
   }
 
   if (search) {
