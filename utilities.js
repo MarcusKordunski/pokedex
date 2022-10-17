@@ -72,12 +72,12 @@ export async function renderChain(chain) {
 
 export async function setFavorite(id) {
   let favBtn = document.querySelector('.fav-btn')
-  if (localStorage.getItem(`${id}`) === null) {
+  if (localStorage.getItem(`pokemon${id}`) === null) {
     favBtn.classList.add('active')
-    localStorage.setItem(`${id}`, `${id}`)
+    localStorage.setItem(`pokemon${id}`, `${id}`)
   } else {
     favBtn.classList.remove('active')
-    localStorage.removeItem(`${id}`)
+    localStorage.removeItem(`pokemon${id}`)
   }
   await renderPokemonsList()
 }
