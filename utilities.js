@@ -1,5 +1,5 @@
-import { getPokemon } from "./api.js";
-import { renderPokemonsList } from "./script.js";
+import { getAllPokemons, getPokemon } from "./api.js";
+import { renderBattle, renderPokemonsList } from "./script.js";
 
 const tagColor = {
   normal: '#edf5f4',
@@ -80,4 +80,50 @@ export async function setFavorite(id) {
     localStorage.removeItem(`pokemon${id}`)
   }
   await renderPokemonsList()
+}
+
+export async function renderPokemonsFightersList(fighters) {
+  document.querySelector('.fight-list').innerHTML = ''
+  let favList = document.querySelector('.favorites-fight-list')
+  favList.innerHTML = ''
+
+  let data = await getAllPokemons();
+  let pokemonsList = data.results;
+
+  if (localStorage.length === 0) {
+    favList.innerHTML = '<p>No favorite pokémon</p>'
+  }
+
+  for (let i = 0; i < localStorage.length; i++) {
+    let counter = 0
+    let key = localStorage.key(i)
+    let id = Number(localStorage.getItem(key))
+    if (id !== null && key.includes('pokemon')) {
+      counter += 1
+      let pokemon = document.createElement('div')
+      pokemon.classList.add('pokemons-list__item')
+      pokemon.classList.add('fav-list-item')
+      pokemon.innerHTML = `<div>${pokemonsList[id - 1].name}</div> <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'> <div><img src='./images/pixel-star.jpg' alt ='' width='20'>`
+      favList.appendChild(pokemon)
+      pokemon.addEventListener('click', () => {
+        fighters.f2 = id
+        renderBattle(fighters)
+      })
+    } else if (i = localStorage.length - 1 && counter === 0) {
+      favList.innerHTML = '<p>No favorite pokémon</p>'
+    }
+  }
+
+  for (let i = 0; i < pokemonsList.length; i++) {
+    let splitId = pokemonsList[i].url.split('/')
+    let id = splitId[splitId.length - 2]
+    let pokemon = document.createElement('div')
+    pokemon.classList.add('.pokemons-list__item')
+    pokemon.innerHTML = `<div>${pokemonsList[i].name}</div><img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png' alt ='' width='60'>`
+    document.querySelector('.fight-list').appendChild(pokemon)
+    pokemon.addEventListener('click', () => {
+      fighters.f2 = id
+      renderBattle(fighters)
+    })
+  }
 }
