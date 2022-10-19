@@ -152,6 +152,7 @@ async function renderPokemonEvolution(id) {
   document.querySelector('.menu-btn-1').classList.remove('active')
   document.querySelector('.menu-btn-2').classList.add('active')
   document.querySelector('.menu-btn-3').classList.remove('active')
+  document.querySelector('.menu-btn-4').classList.remove('active')
 }
 
 async function renderPokemonAbilities(id) {
@@ -190,6 +191,7 @@ async function renderPokemonAbilities(id) {
   document.querySelector('.menu-btn-1').classList.remove('active')
   document.querySelector('.menu-btn-2').classList.remove('active')
   document.querySelector('.menu-btn-3').classList.add('active')
+  document.querySelector('.menu-btn-4').classList.remove('active')
 }
 
 async function renderPokemonFight(id) {
