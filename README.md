@@ -22,9 +22,9 @@ https://courageous-flan-2dd18e.netlify.app/
 ![image](https://user-images.githubusercontent.com/95471509/196722735-88569ef7-24d1-4580-b89f-f5acdfdd08e2.png)
 ![image](https://user-images.githubusercontent.com/95471509/196722892-70479454-7a9c-43b8-87d7-ec929a1c5153.png)
 ## Built With
-* [Javascript](https://www.javascript.com/) - Javascript is a programming language that is one of the core technologies of the World Wide Web.
-* HTML5 - HTML5 is a markup language used for structuring and presenting content on the World Wide Web.
-* CSS3 - Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language such as HTML or XML.
+* [Javascript](https://www.javascript.com/) - Javascript is a programming language that is one of the core technologies of the World Wide Web
+* HTML5 - HTML5 is a markup language used for structuring and presenting content on the World Wide Web
+* CSS3 - Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language such as HTML or XML
 ## Authors
 
 * **Marcus Kordunski** - 
