@@ -56,7 +56,8 @@ body {
 }
 
 .pokemons-list__list>div,
-.fav-list-item {
+.fav-list-item,
+.fight-list>div {
   height: 40px;
   width: 100%;
   display: flex;
@@ -78,11 +79,13 @@ body {
 }
 
 .pokemons-list__list>div:hover,
-.fav-list-item:hover {
+.fav-list-item:hover,
+.fight-list>div:hover {
   background-color: #ddd;
 }
 
-.favorites-list {
+.favorites-list,
+.favorites-fight-list {
   border-bottom: 4px #cdd2d2 dashed;
 }
 
@@ -253,13 +256,9 @@ body {
   border-radius: 16px 0 0;
 }
 
-.menu-btn-2.active {
-  color: #0e1111;
-  background-color: #FFDEE9;
-  background-image: linear-gradient(180deg, #FFDEE9 0%, #B5FFFC 100%);
-}
-
-.menu-btn-3.active {
+.menu-btn-2.active,
+.menu-btn-3.active,
+.menu-btn-4.active {
   color: #0e1111;
   background-color: #FFDEE9;
   background-image: linear-gradient(180deg, #FFDEE9 0%, #B5FFFC 100%);
@@ -322,4 +321,43 @@ td {
 .favorite>p {
   font-size: 12px;
   margin: 0;
+}
+
+.battleground-container {
+  width: 100%;
+  height: 270px;
+  margin-top: 10px;
+  background-image: url(./images/battleground.jpg);
+  background-size: contain;
+}
+
+.fighter1-container,
+.fighter2-container {
+  position: relative;
+}
+
+.fighter1-container {
+  left: 20%;
+  top: 50%;
+}
+
+.fighter1-img {
+  transform: scale(1.4);
+  filter: drop-shadow(6px -1px 0px rgba(32, 32, 32, 0.435));
+}
+
+.fighter2-img {
+  transform: scale(0.8);
+  filter: drop-shadow(6px -1px 0px rgba(32, 32, 32, 0.435));
+}
+
+.fighter2-container {
+  left: 55%;
+  bottom: 10%;
+}
+
+.fight-res {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -1,4 +1,4 @@
-import { renderTags, randomColor, percentOfStatbar, renderChain, setFavorite } from "./utilities.js"
+import { renderTags, randomColor, percentOfStatbar, renderChain, setFavorite, renderPokemonsFightersList } from "./utilities.js"
 import { getAllPokemons, getPokemon, getPokemonAbility, getPokemonEvolChain, getPokemonSpecies } from "./api.js"
 
 async function renderPokemonInfo(id) {
@@ -16,6 +16,7 @@ async function renderPokemonInfo(id) {
     <div class="menu-btn menu-btn-1 active"><p>Info</p></div>
     <div class="menu-btn menu-btn-2"><p>Evolution</p></div>
     <div class="menu-btn menu-btn-3"><p>Abilities</p></div>
+    <div class="menu-btn menu-btn-4"><p>Fight</p></div>
   </div>
   <div class='pokemon__info'>
     <div class='header'>
@@ -74,6 +75,7 @@ async function renderPokemonInfo(id) {
   document.querySelector('.menu-btn-1').addEventListener('click', () => { renderPokemonInfo(id) })
   document.querySelector('.menu-btn-2').addEventListener('click', () => { renderPokemonEvolution(id) })
   document.querySelector('.menu-btn-3').addEventListener('click', () => { renderPokemonAbilities(id) })
+  document.querySelector('.menu-btn-4').addEventListener('click', () => { renderPokemonFight(id) })
 }
 
 export async function renderPokemonsList(search) {
@@ -188,6 +190,77 @@ async function renderPokemonAbilities(id) {
   document.querySelector('.menu-btn-1').classList.remove('active')
   document.querySelector('.menu-btn-2').classList.remove('active')
   document.querySelector('.menu-btn-3').classList.add('active')
+}
+
+async function renderPokemonFight(id) {
+  let pokedex = document.querySelector('.pokemon__info')
+  pokedex.innerHTML = ''
+  const loader = document.querySelector('.loader-pokemon')
+  loader.classList.toggle('active')
+  let data = await getPokemon(id)
+  let fighters = {}
+  fighters.f1 = data
+
+  let html = `
+  <div class="fight-menu">
+    <div><img src="${data.sprites.front_default}" alt=""></div>
+    <p>${data.name}</p>
+    <p>Choose an opponent:</p>
+    <h2 class="fav-title">Favorite pokémon:</h2>
+    <div class="favorites-fight-list"></div>
+    <div class="fight-list">
+    </div>
+  </div>
+  `
+
+  pokedex.innerHTML = html
+  await renderPokemonsFightersList(fighters)
+  loader.classList.toggle('active')
+
+  document.querySelector('.menu-btn-1').classList.remove('active')
+  document.querySelector('.menu-btn-2').classList.remove('active')
+  document.querySelector('.menu-btn-3').classList.remove('active')
+  document.querySelector('.menu-btn-4').classList.add('active')
+}
+
+export async function renderBattle(fighters) {
+  let pokedex = document.querySelector('.pokemon__info')
+  pokedex.innerHTML = ''
+  const loader = document.querySelector('.loader-pokemon')
+  loader.classList.toggle('active')
+  let data = await getPokemon(fighters.f2)
+  fighters.f2 = data
+
+  let html = `
+  <div class="battle">
+    <div class="battleground-container">
+    <div class="fighter1-container"><img class="fighter1-img" src="${fighters.f1.sprites.back_default}" alt=""></div>
+    <div class="fighter2-container"><img class="fighter2-img" src="${fighters.f2.sprites.front_default}" alt=""></div>
+    </div>
+    <p>Battle results:</p>
+    <p>${fighters.f1.weight + fighters.f1.height + fighters.f1.base_experience > fighters.f2.weight + fighters.f1.height + fighters.f1.base_experience ?
+      fighters.f1.name : fighters.f2.name} wins!</p>
+    <div class="fight-res">
+      <div>
+        <p>${fighters.f1.name}</p>
+        <p>Exp: ${fighters.f1.base_experience}</p>
+        <p>Height: ${fighters.f1.height}</p>
+        <p>Weight: ${fighters.f1.weight}</p>
+        <p>Summary power: ${fighters.f1.weight + fighters.f1.height + fighters.f1.base_experience}</p>
+      </div>
+      <div>
+        <p>${fighters.f2.name}</p>
+        <p>Exp: ${fighters.f2.base_experience}</p>
+        <p>Height: ${fighters.f2.height}</p>
+        <p>Weight: ${fighters.f2.weight}</p>
+        <p>Summary power: ${fighters.f2.weight + fighters.f1.height + fighters.f1.base_experience}</p>
+      </div>
+    </div>
+  </div>
+  `
+
+  pokedex.innerHTML = html
+  loader.classList.toggle('active')
 }
 
 renderPokemonsList()
